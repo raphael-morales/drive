@@ -11,6 +11,7 @@ class HomeController
 
     public function manage()
     {
+        include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/home.php');
     }
 }

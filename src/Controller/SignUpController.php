@@ -11,6 +11,7 @@ class SignUpController
 
     public function manage()
     {
+        include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/signUp.php');
     }
 }
