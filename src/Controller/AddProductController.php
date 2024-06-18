@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace src\Controller;
 
-use Model\Model;
+use src\Model\Model;
 
 class AddProductController
 {
