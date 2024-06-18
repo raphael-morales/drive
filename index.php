@@ -9,11 +9,13 @@ if (isset($_GET['logout'])){
 
 require('src/Controller/HomeController.php');
 require('src/Controller/SignUpController.php');
+require('src/Controller/SignInController.php');
 
 $page = filter_input(INPUT_GET, "page");
 
 $route = [
-    "signUp" => SignUpController::class
+    "signUp" => SignUpController::class,
+    "signIn" => SignInController::class
 ];
 
 $controller = null;

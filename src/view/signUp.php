@@ -1,5 +1,6 @@
 <?php
 ?>
+<h1 class="title" style="text-align: center"><?= $this->title ?></h1>
 <form class=" d-flex flex-column align-items-center">
     <div class="mb-3 w-50">
         <label for="email" class="form-label">Email</label>
