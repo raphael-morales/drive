@@ -57,4 +57,14 @@ class Model
             return [];
         }
     }
+    public function orderProductsByCategory($category){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_category =?');
+            $request->execute([$category]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
 }
