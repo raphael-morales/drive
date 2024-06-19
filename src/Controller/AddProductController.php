@@ -24,7 +24,7 @@ class AddProductController
                 header('Location: index.php?page=signIn');
                 exit();
             }
-        var_dump($_POST);
+     
             if (!empty($_POST)) {
 
                 $name = isset($_POST['name']) ? $_POST['name'] : null;

@@ -67,4 +67,14 @@ class Model
             return [];
         }
     }
+    public function getProducts(){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products');
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
 }
