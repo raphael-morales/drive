@@ -50,6 +50,8 @@ class SignInController
         }
 
         include(__DIR__ . '/../view/header.php');
+        include(__DIR__ . '/../view/popUp.php');
         include(__DIR__ . '/../view/signIn.php');
+        include(__DIR__ . '/../view/footer.php');
     }
 }

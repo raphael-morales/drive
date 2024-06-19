@@ -8,10 +8,21 @@ class SignUpController
 
     public $msg;
 
+    public $param;
+
+    public $altParam;
+    public $displayValue;
+
+    
+
     public function __construct()
     {
         $this->title = "S'inscrire";
         $this->model = new ModelUser();
+        $this->msg = null;
+        $this->param = "index.php?page=signUp";
+        $this->altParam = "retour";
+        $this->displayValue = "Retour";
     }
 
     public function manage()
@@ -59,6 +70,8 @@ class SignUpController
         }
 
         include(__DIR__ . '/../view/header.php');
+        include(__DIR__ . '/../view/popUp.php');
         include(__DIR__ . '/../view/signUp.php');
+        include(__DIR__ . '/../view/footer.php');
     }
 }
