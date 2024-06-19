@@ -11,7 +11,7 @@ class HomeController
 
     public function manage()
     {
-
+var_dump($_SESSION);
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/home.php');
         include(__DIR__ . '/../view/footer.php');
