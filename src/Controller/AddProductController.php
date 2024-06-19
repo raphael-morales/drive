@@ -16,6 +16,9 @@ class AddProductController
         $this->msg = null;
         $this->title = "Ajouter un Produit";
         $this->categories = $this->model->getCategories();
+        $this->param = "index.php?page=addProduct";
+        $this->altParam = "retour";
+        $this->displayValue = "Retour";
     }
 
     public function manage()
