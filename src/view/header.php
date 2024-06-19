@@ -6,6 +6,7 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
         <title>Drive.fr</title>
     </head>
 <body>
@@ -37,7 +38,7 @@
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <?php if (isset($_SESSION['user']) AND !empty($_SESSION['user'])) { ?>
                                 <li class="nav-item">
-                                    <span class="nav-link">Bonjour, <?= $_SESSION["user"]["firstname"] ?></span>
+                                    <a class="nav-link" href="index.php?page=myProfil" alt="lien vers la page mon profil">Bonjour, <?= $_SESSION["user"]["firstname"] ?></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?logout=true">Déconnexion</a>
