@@ -31,7 +31,7 @@
     </div>
     <div class="form-group mb-3">
         <label for="price" class="form-label">Prix</label>
-        <input type="number" class="form-control" name="price" id="price">
+        <input type="number" step="0.01" class="form-control" name="price" id="price">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
