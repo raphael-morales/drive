@@ -23,6 +23,8 @@ $route = [
     "signUp" => SignUpController::class,
     "signIn" => SignInController::class,
     "addProduct" => AddProductController::class,
+    "listProducts" => ListProductsController::class,
+    "myProfil" => MyProfilController::class
 ];
 
 $controller = null;
