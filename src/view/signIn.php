@@ -8,7 +8,7 @@
     </div>
     <div class="mb-3 w-50">
         <label for="password" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="password">
+        <input type="password" class="form-control" id="password" name="password">
     </div>
-    <button type="submit" class="w-50 btn btn-primary">S'inscrire</button>
+    <button type="submit" class="w-50 btn btn-primary">Se connecter</button>
 </form>

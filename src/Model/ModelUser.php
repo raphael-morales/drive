@@ -47,7 +47,7 @@ class ModelUser
     {
 
         try {
-            $request = $this->db->prepare("SELECT * FROM users WHERE email_user = ?");
+            $request = $this->db->prepare("SELECT * FROM users WHERE user_email = ?");
 
             $request->execute([$email]);
 
