@@ -28,7 +28,7 @@
                                 </li>
                             </ul>
                         </div>                    
-                        <form class="d-flex me-3" role="search" method="GET" action="index.php">
+                        <form class="d-flex me-3" role="search" method="GET" action="">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchQuery">
                             <button class="btn btn-outline-success" type="submit">Rechercher</button>
                         </form>

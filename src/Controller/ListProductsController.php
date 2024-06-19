@@ -15,11 +15,19 @@ class ListProductsController
         $this->model = new Model();
         $this->msg = null;
         $this->title = "Liste des produits";
-        $this->products = $this->model->getProducts();
     }
 
     public function manage()
     {
+        var_dump($_GET);
+        if(isset($_GET['searchQuery'])){
+            $searchQuery = $_GET['searchQuery'];
+            $this->products = $this->model->searchProducts($searchQuery);
+            header('Location: index.php?page=listProducts&searchQuery='.$searchQuery);
+        }else{
+            
+            $this->products = $this->model->getProducts();
+        }
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/listProducts.php');
