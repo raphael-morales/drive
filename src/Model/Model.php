@@ -37,4 +37,34 @@ class Model
             return [];
         }
     }
+    public function orderProductsByAscPrice(){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price ASC');
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
+    public function orderProductsByDescPrice(){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price DESC');
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
+    public function orderProductsByCategory($category){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products LEFT JOIN categories ON products.product_category_id = categories.category_id WHERE product_category_id =?');
+            $request->execute([$category]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
 }
