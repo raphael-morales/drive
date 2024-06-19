@@ -1,14 +1,14 @@
 <?php
 ?>
 <h1 class="title" style="text-align: center"><?= $this->title ?></h1>
-<form class=" d-flex flex-column align-items-center">
+<form class=" d-flex flex-column align-items-center" method="post">
     <div class="mb-3 w-50">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email">
     </div>
     <div class="mb-3 w-50">
         <label for="password" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="password">
+        <input type="password" class="form-control" id="password" name="password">
     </div>
     <div class="mb-3 w-50">
         <label for="firstname" class="form-label">Prénom</label>
@@ -16,7 +16,7 @@
     </div>
     <div class="mb-3 w-50">
         <label for="lastname" class="form-label">Nom</label>
-        <input type="password" class="form-control" id="lastname" name="lastname">
+        <input type="text" class="form-control" id="lastname" name="lastname">
     </div>
     <div class="mb-3 w-50">
         <label for="address" class="form-label">adresse</label>

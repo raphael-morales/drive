@@ -12,6 +12,7 @@ require('src/Controller/SignUpController.php');
 require('src/Controller/SignInController.php');
 require('src/Controller/AddProductController.php');
 require('src/Model/Model.php');
+require('src/Model/ModelUser.php');
 
 $page = filter_input(INPUT_GET, "page");
 
