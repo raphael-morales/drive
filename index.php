@@ -22,6 +22,7 @@ $page = filter_input(INPUT_GET, "page");
 $route = [
     "signUp" => SignUpController::class,
     "signIn" => SignInController::class,
+    "home" => HomeController::class,
     "addProduct" => AddProductController::class,
     "listProducts" => ListProductsController::class,
     "myProfil" => MyProfilController::class
