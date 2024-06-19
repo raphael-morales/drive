@@ -5,6 +5,10 @@ class AddProductController
     public $msg;
     public $title;
     public $categories;
+    public $param;
+    public $altParam;
+    public $displayValue;
+
 
     public function __construct()
     {
@@ -20,8 +24,9 @@ class AddProductController
                 header('Location: index.php?page=signIn');
                 exit();
             }
+        var_dump($_POST);
+            if (!empty($_POST)) {
 
-            if (isset($_POST['submit'])) {
                 $name = isset($_POST['name']) ? $_POST['name'] : null;
                 $category = isset($_POST['category']) ? $_POST['category'] : null;
                 $picture = isset($_FILES['picture']['name']) ? $_FILES['picture']['name'] : null;
@@ -29,16 +34,16 @@ class AddProductController
                 $origin = isset($_POST['origin']) ? $_POST['origin'] : null;
                 $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : null;
                 $price = isset($_POST['price']) ? $_POST['price'] : null;
-                $date = isset($_POST['date']) ? $_POST['date'] : null;
 
-                if (empty($name) || empty($category) || empty($picture) || empty($description) || empty($origin) || empty($quantity) || empty($price) || empty($date)) {
+                if (empty($name) || empty($category) || empty($picture) || empty($description) || empty($origin) || empty($quantity) || empty($price)) {
                     $this->msg = "Tous les champs doivent être remplis.";
                 } else {
-                    $targetDir = "uploads/";
+                    $targetDir = "src/public/img/uploads/";
                     $targetFile = $targetDir . basename($picture);
 
+
                     if (move_uploaded_file($_FILES["picture"]["tmp_name"], $targetFile)) {
-                        $result = $this->model->addProduct($name, $category, $targetFile, $description, $origin, $quantity, $price, $date);
+                        $result = $this->model->addProduct($name, $category, $targetFile, $description, $origin, $quantity, $price);
 
                         if ($result) {
                             $this->msg = "Produit ajouté avec succès";
