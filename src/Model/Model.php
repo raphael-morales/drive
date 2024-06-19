@@ -79,13 +79,12 @@ class Model
     }
     public function searchProducts($word){
         try {
-            $request = $this->db->prepare('SELECT * FROM products WHERE product_name LIKE % . $word . %');
-            $request->execute([$word]);
-            return $request->fetchAll(PDO::FETCH_ASSOC);        
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_name LIKE ?');
+            $request->execute(["%$word%"]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);  
         }catch (PDOException $e){
             error_log('Error: '. $e->getMessage());
             return [];
         }
-
     }
 }

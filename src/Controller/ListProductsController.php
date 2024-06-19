@@ -19,11 +19,10 @@ class ListProductsController
 
     public function manage()
     {
-        var_dump($_GET);
-        if(isset($_GET['searchQuery'])){
-            $searchQuery = $_GET['searchQuery'];
+        if(isset($_POST['searchQuery'])){
+            $searchQuery = $_POST['searchQuery'];
             $this->products = $this->model->searchProducts($searchQuery);
-            header('Location: index.php?page=listProducts&searchQuery='.$searchQuery);
+            var_dump($this->products);
         }else{
             
             $this->products = $this->model->getProducts();
