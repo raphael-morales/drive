@@ -1,9 +1,5 @@
 <?php
 
-namespace src\Controller;
-
-use src\Model\Model;
-
 class AddProductController
 {
     public $model;

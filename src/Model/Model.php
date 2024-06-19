@@ -1,10 +1,5 @@
 <?php
 
-namespace src\Model;
-
-use PDO;
-use PDOException;
-
 class Model
 {
     private $db;
@@ -12,7 +7,7 @@ class Model
     public function __construct()
     {
         try {
-            $this->db = new PDO('mysql:host=your_host;dbname=your_dbname;charset=utf8', 'your_username', 'your_password');
+            $this->db = new PDO('mysql:host=mysql-drivem2i.alwaysdata.net;dbname=drivem2i_drive;charset=utf8', 'drivem2i', '1234@M2i');
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             error_log('Connection error: ' . $e->getMessage());
