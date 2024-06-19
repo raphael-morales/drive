@@ -2,7 +2,6 @@
 class AddProductController
 {
     public $model;
-    public $msgSuccess;
     public $msg;
     public $title;
     public $categories;
@@ -10,7 +9,6 @@ class AddProductController
     public function __construct()
     {
         $this->model = new Model();
-        $this->msgSuccess = null;
         $this->msg = null;
         $this->title = "Ajouter un Produit";
         $this->categories = $this->model->getCategories();
@@ -18,7 +16,7 @@ class AddProductController
 
     public function manage()
     {
-            if (!isset($_SESSION['user'])) {
+                        if (!isset($_SESSION['user'])) {
                 header('Location: index.php?page=signIn');
                 exit();
             }
@@ -43,7 +41,7 @@ class AddProductController
                         $result = $this->model->addProduct($name, $category, $targetFile, $description, $origin, $quantity, $price, $date);
 
                         if ($result) {
-                            $this->msgSuccess = "Produit ajouté avec succès";
+                            $this->msg = "Produit ajouté avec succès";
                             header('Location: index.php?page=listProducts');
                             exit();
                         } else {
