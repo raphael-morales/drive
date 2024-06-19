@@ -21,7 +21,7 @@ class Model
             $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
-            var_dump('Error : ' . $e->getMessage());
+            error_log('Error : ' . $e->getMessage());
             return false;
         }
     }
