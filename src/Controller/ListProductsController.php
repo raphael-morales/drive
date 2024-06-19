@@ -22,7 +22,6 @@ class ListProductsController
         if(isset($_POST['searchQuery'])){
             $searchQuery = $_POST['searchQuery'];
             $this->products = $this->model->searchProducts($searchQuery);
-            var_dump($this->products);
         }else{
             
             $this->products = $this->model->getProducts();
