@@ -1,10 +1,12 @@
-<?php if ($this->msgSuccess) { ?>
-    <div class="alert alert-success" role="alert">
-        <?= $this->msgSuccess ?>
+<?php 
+
+if ($this->msg) { ?>
+    <div class="boxAlert">
+        <div class="boxAlertBody">
+            <div class="mx-auto text-center mb-3">
+                <p><?= $this->msg ?></p>
+            </div>
+            <a class="btn btn-dark w-25" href='<?= $this->param ?>' alt='<?= $this->altParam ?>'><?=  $this->displayValue ?></a>
+        </div>
     </div>
 <?php }
-if ($this->msgError) { ?>
-    <div class="alert alert-danger" role="alert">
-        <?= $this->msgError ?>
-    </div>
-<?php } ?>
