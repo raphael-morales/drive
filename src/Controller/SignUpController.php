@@ -6,7 +6,7 @@ class SignUpController
 
     public $model;
 
-    public $msgError;
+    public $msg;
 
     public function __construct()
     {
@@ -26,11 +26,11 @@ class SignUpController
                 || empty(trim($_POST['zipcode'])) || empty(trim($_POST['city'])) || empty(trim($_POST['phone']))
                 || empty(trim($_POST['birthday']))){
 
-                $this->msgError = "Merci de renseigner les champs suivant :";
+                $this->msg = "Merci de renseigner les champs suivant :";
 
                 foreach ($_POST as $key => $value) {
                     if (empty(trim($value))) {
-                        $this->msgError .= " $key.";
+                        $this->msg .= " $key.";
                     }
                 }
 

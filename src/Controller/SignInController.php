@@ -11,7 +11,7 @@ class SignInController
 
     public function __construct()
     {
-        $this->model = new Model();
+        $this->model = new ModelUser();
         $this->msg = null;
         $this->title = "Se connecter";
         $this->param = "index.php?page=signIn";

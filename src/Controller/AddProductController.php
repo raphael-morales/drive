@@ -3,7 +3,7 @@ class AddProductController
 {
     public $model;
     public $msgSuccess;
-    public $msgError;
+    public $msg;
     public $title;
     public $categories;
 
@@ -11,15 +11,13 @@ class AddProductController
     {
         $this->model = new Model();
         $this->msgSuccess = null;
-        $this->msgError = null;
+        $this->msg = null;
         $this->title = "Ajouter un Produit";
         $this->categories = $this->model->getCategories();
     }
 
     public function manage()
     {
-            session_start();
-
             if (!isset($_SESSION['user'])) {
                 header('Location: index.php?page=signIn');
                 exit();
@@ -36,7 +34,7 @@ class AddProductController
                 $date = isset($_POST['date']) ? $_POST['date'] : null;
 
                 if (empty($name) || empty($category) || empty($picture) || empty($description) || empty($origin) || empty($quantity) || empty($price) || empty($date)) {
-                    $this->msgError = "Tous les champs doivent être remplis.";
+                    $this->msg = "Tous les champs doivent être remplis.";
                 } else {
                     $targetDir = "uploads/";
                     $targetFile = $targetDir . basename($picture);
@@ -49,10 +47,10 @@ class AddProductController
                             header('Location: index.php?page=listProducts');
                             exit();
                         } else {
-                            $this->msgError = "Ajout de produit échoué";
+                            $this->msg = "Ajout de produit échoué";
                         }
                     } else {
-                        $this->msgError = "Échec du téléchargement de l'image.";
+                        $this->msg = "Échec du téléchargement de l'image.";
                     }
                 }
             }
