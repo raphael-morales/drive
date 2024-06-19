@@ -1,7 +1,7 @@
 <?php
 ?>
 <h1 class="title" style="text-align: center"><?= $this->title ?></h1>
-<form class=" d-flex flex-column align-items-center">
+<form class=" d-flex flex-column align-items-center" method="post">
     <div class="mb-3 w-50">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email">
