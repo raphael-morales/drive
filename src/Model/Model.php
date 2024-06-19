@@ -14,14 +14,14 @@ class Model
         }
     }
 
-    public function addProduct($name, $category, $picture, $description, $origin, $quantity, $price, $date)
+    public function addProduct($name, $category, $picture, $description, $origin, $quantity, $price)
     {
         try {
-            $request = $this->db->prepare('INSERT INTO products (product_name, product_category, product_picture, product_description, product_origin, product_quantity, product_price, product_date) VALUES (?,?,?,?,?,?,?,?)');
-            $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price, $date]);
+            $request = $this->db->prepare('INSERT INTO products (product_name, product_category_id, product_picture, product_description, product_origin, product_quantity, product_price) VALUES (?,?,?,?,?,?,?)');
+            $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
-            error_log('Error : ' . $e->getMessage());
+            var_dump('Error : ' . $e->getMessage());
             return false;
         }
     }
