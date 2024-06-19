@@ -24,9 +24,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?page=listProducts">Produits</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.php?page=addProduct">Ajouter</a>
-                                </li>
+                                <?php if (isset($_SESSION["user"]["id"]) AND ($_SESSION["user"]["role"] === "administrateur")) { ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="index.php?page=addProduct">Ajouter</a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>                    
                         <form class="d-flex me-3" role="search" method="POST" action="index.php?page=listProducts">

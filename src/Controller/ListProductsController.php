@@ -15,11 +15,12 @@ class ListProductsController
         $this->model = new Model();
         $this->msg = null;
         $this->title = "Liste des produits";
+        $this->products = $this->model->getProducts();
     }
 
     public function manage()
     {
-        if(isset($_POST['searchQuery'])){
+if(isset($_POST['searchQuery'])){
             $searchQuery = $_POST['searchQuery'];
             $this->products = $this->model->searchProducts($searchQuery);
         }else{
