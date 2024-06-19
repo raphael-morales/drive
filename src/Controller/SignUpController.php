@@ -40,16 +40,16 @@ class SignUpController
 
                 $idUser = $this->model->addNewUser($_POST['firstname'], $_POST['lastname'],$_POST['email'], $password,
                                                    $_POST['address'], $_POST['zipcode'],$_POST['city'],$_POST["phone"],
-                                                   $_POST["phone"]);
+                                                   $_POST["birthday"]);
 
 
                 if ($idUser){
 
                     $_SESSION['user'] = [
-                        'id' => $idUser,
-                        'firstname' => $_POST['firstname'],
-                        'lastname' => $_POST['lastname'],
-                        'email' => $_POST['email']
+                        'firstname'=> $_POST["firstname"],
+                        'email' => $_POST["email"],
+                        'id'    => $idUser,
+                        'role'  => null
                     ];
 
                     header('Location: index.php');
