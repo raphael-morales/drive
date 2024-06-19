@@ -21,7 +21,7 @@
                         <div class="d-flex ms-3">
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.php?page=product">Produits</a>
+                                    <a class="nav-link" href="index.php?page=listProducts">Produits</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?page=addProduct">Ajouter</a>
