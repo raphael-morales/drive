@@ -1,5 +1,4 @@
 <?php
-
 class AddProductController
 {
     public $model;
@@ -14,47 +13,54 @@ class AddProductController
         $this->msgSuccess = null;
         $this->msgError = null;
         $this->title = "Ajouter un Produit";
-        $this->categories = $this->model->getCategories(); // Assuming getCategories method is implemented in the model to fetch categories
+        $this->categories = $this->model->getCategories();
     }
 
     public function manage()
     {
-        if (!isset($_SESSION['user'])) {
-            header('Location: index.php?page=signIn');
-            exit();
-        }
+            session_start();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'];
-            $category = $_POST['category'];
-            $picture = $_FILES['picture']['name'];
-            $description = $_POST['description'];
-            $origin = $_POST['origin'];
-            $quantity = $_POST['quantity'];
-            $price = $_POST['price'];
-            $date = $_POST['date'];
+            if (!isset($_SESSION['user'])) {
+                header('Location: index.php?page=signIn');
+                exit();
+            }
 
-            if (empty($name) || empty($category) || empty($picture) || empty($description) || empty($origin) || empty($quantity) || empty($price) || empty($date)) {
-                $this->msgError = "Tous les champs doivent être remplis.";
-            } else {
-                $targetDir = "uploads/";
-                $targetFile = $targetDir . basename($picture);
-                move_uploaded_file($_FILES["picture"]["tmp_name"], $targetFile);
+            if (isset($_POST['submit'])) {
+                $name = isset($_POST['name']) ? $_POST['name'] : null;
+                $category = isset($_POST['category']) ? $_POST['category'] : null;
+                $picture = isset($_FILES['picture']['name']) ? $_FILES['picture']['name'] : null;
+                $description = isset($_POST['description']) ? $_POST['description'] : null;
+                $origin = isset($_POST['origin']) ? $_POST['origin'] : null;
+                $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : null;
+                $price = isset($_POST['price']) ? $_POST['price'] : null;
+                $date = isset($_POST['date']) ? $_POST['date'] : null;
 
-                $result = $this->model->addProduct($name, $category, $targetFile, $description, $origin, $quantity, $price, $date);
-                if ($result) {
-                    $this->msgSuccess = "Produit ajouté avec succès";
-                    header('Location: index.php?page=listProducts');
-                    exit();
+                if (empty($name) || empty($category) || empty($picture) || empty($description) || empty($origin) || empty($quantity) || empty($price) || empty($date)) {
+                    $this->msgError = "Tous les champs doivent être remplis.";
                 } else {
-                    $this->msgError = "Ajout de produit échoué";
+                    $targetDir = "uploads/";
+                    $targetFile = $targetDir . basename($picture);
+
+                    if (move_uploaded_file($_FILES["picture"]["tmp_name"], $targetFile)) {
+                        $result = $this->model->addProduct($name, $category, $targetFile, $description, $origin, $quantity, $price, $date);
+
+                        if ($result) {
+                            $this->msgSuccess = "Produit ajouté avec succès";
+                            header('Location: index.php?page=listProducts');
+                            exit();
+                        } else {
+                            $this->msgError = "Ajout de produit échoué";
+                        }
+                    } else {
+                        $this->msgError = "Échec du téléchargement de l'image.";
+                    }
                 }
             }
+
+            include(__DIR__ . "/../view/header.php");
+            include(__DIR__ . "/../view/popUp.php");
+            include(__DIR__ . "/../view/addProduct.php");
+            include(__DIR__ . "/../view/footer.php");
         }
 
-        include(__DIR__ . "/../view/header.php");
-        include(__DIR__ . "/../view/popUp.php");
-        include(__DIR__ . "/../view/addProduct.php");
-        include(__DIR__ . "/../view/footer.php");
-    }
 }

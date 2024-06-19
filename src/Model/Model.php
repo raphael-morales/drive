@@ -17,7 +17,7 @@ class Model
     public function addProduct($name, $category, $picture, $description, $origin, $quantity, $price, $date)
     {
         try {
-            $request = $this->db->prepare('INSERT INTO products (name, category, picture, description, origin, quantity, price, date) VALUES (?,?,?,?,?,?,?,?)');
+            $request = $this->db->prepare('INSERT INTO products (product_name, product_category, product_picture, product_description, product_origin, product_quantity, product_price, product_date) VALUES (?,?,?,?,?,?,?,?)');
             $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price, $date]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
