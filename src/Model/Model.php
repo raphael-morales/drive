@@ -59,7 +59,7 @@ class Model
     }
     public function orderProductsByCategory($category){
         try {
-            $request = $this->db->prepare('SELECT * FROM products WHERE product_category =?');
+            $request = $this->db->prepare('SELECT * FROM products LEFT JOIN categories ON products.product_category_id = categories.category_id WHERE product_category_id =?');
             $request->execute([$category]);
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
