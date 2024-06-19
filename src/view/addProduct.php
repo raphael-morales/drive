@@ -9,7 +9,7 @@
         <select class="form-control" id="category" name="category">
             <option value=''>- -</option>
             <?php foreach ($this->categories as $cat) {
-                echo "<option value='{$cat['id']}'>{$cat['name']}</option>";
+                echo "<option value='{$cat['category_id']}'>{$cat['category_name']}</option>";
             } ?>
         </select>
     </div>
