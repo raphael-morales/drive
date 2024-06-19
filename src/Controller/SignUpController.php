@@ -70,6 +70,8 @@ class SignUpController
         }
 
         include(__DIR__ . '/../view/header.php');
+        include(__DIR__ . '/../view/popUp.php');
         include(__DIR__ . '/../view/signUp.php');
+        include(__DIR__ . '/../view/footer.php');
     }
 }
