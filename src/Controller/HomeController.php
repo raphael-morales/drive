@@ -6,6 +6,7 @@ class HomeController
 
     public function __construct()
     {
+        $this->title = "Accueil";
     }
 
     public function manage()
@@ -13,7 +14,6 @@ class HomeController
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/home.php');
-        include(__DIR__ . '/../view/listProducts.php');
         include(__DIR__ . '/../view/footer.php');
 
     }
