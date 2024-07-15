@@ -13,6 +13,7 @@ require('src/Controller/SignInController.php');
 require('src/Controller/AddProductController.php');
 require('src/Controller/MyProfilController.php');
 require('src/Controller/ListProductsController.php');
+require('src/Controller/ShoppingCartController.php');
 require('src/Model/Model.php');
 require('src/Model/ModelUser.php');
 
@@ -25,6 +26,7 @@ $route = [
     "home" => HomeController::class,
     "addProduct" => AddProductController::class,
     "listProducts" => ListProductsController::class,
+    "shoppingCart" => ShoppingCartController::class,
     "myProfil" => MyProfilController::class
 ];
 

@@ -41,6 +41,9 @@
                                     <a class="nav-link" href="index.php?page=myProfil" alt="lien vers la page mon profil">Bonjour, <?= $_SESSION["user"]["firstname"] ?></a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="index.php?page=shoppingCart">Panier</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="index.php?logout=true">Déconnexion</a>
                                 </li>
                             <?php } else { ?>
