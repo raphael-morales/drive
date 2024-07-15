@@ -10,6 +10,7 @@ class ListProductsController
     public $altParam;
     public $displayValue;
     public $products;
+
     public function __construct()
     {
         $this->model = new Model();
@@ -20,22 +21,30 @@ class ListProductsController
 
     public function manage()
     {
-if(isset($_POST['searchQuery'])){
+        if (isset($_POST['searchQuery'])) {
             $searchQuery = $_POST['searchQuery'];
             $this->products = $this->model->searchProducts($searchQuery);
-        }elseif (isset($_GET["category"])){
+            $_SESSION["searchQuery"] = $_POST['searchQuery'];
+        } elseif (isset($_GET["category"])) {
             $category = $_GET["category"];
             if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
                 $this->products = $this->model->orderProductsByDescPriceByCategory($category);
             } else {
                 $this->products = $this->model->orderProductsByAscPriceByCategory($category);
             }
-        }else{
+        } elseif (isset($_SESSION["searchQuery"])) {
+            $searchQuery = $_SESSION["searchQuery"];
+            if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
+                $this->products = $this->model->searchProductByDescPrice($searchQuery);
+            } else {
+                $this->products = $this->model->searchProductByAscPrice($searchQuery);
+            }
+        } else {
             if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
                 $this->products = $this->model->orderProductsByDescPrice();
-            }elseif(isset($_POST["price"]) && $_POST["price"] == "ASC") {
+            } elseif (isset($_POST["price"]) && $_POST["price"] == "ASC") {
                 $this->products = $this->model->orderProductsByAscPrice();
-            }else{
+            } else {
                 $this->products = $this->model->getProducts();
             }
         }

@@ -12,6 +12,7 @@
         <a class="text-light" href="index.php?page=listProducts">Tous les produits</a>
     </button>
 </div>
+<?php //var_dump($this->products); ?>
 
 <form class="d-flex justify-content-center gap-2 m-4" action="" method="post">
     <select class="form-select w-25" aria-label="Default select example" name="price">
