@@ -80,6 +80,31 @@ class Model
             return [];
         }
     }
+
+    public function searchProductByAscPrice($word)
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE `product_name` LIKE ? ORDER BY product_price ASC;');
+            $request->execute(["%$word%"]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function searchProductByDescPrice($word)
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE `product_name` LIKE ? ORDER BY product_price DESC;');
+            $request->execute(["%$word%"]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
     public function orderProductsByCategory($category){
         try {
             $request = $this->db->prepare('SELECT * FROM products 
