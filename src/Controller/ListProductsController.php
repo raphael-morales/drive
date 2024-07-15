@@ -25,12 +25,20 @@ if(isset($_POST['searchQuery'])){
             $this->products = $this->model->searchProducts($searchQuery);
         }elseif (isset($_GET["category"])){
             $category = $_GET["category"];
-            $this->products = $this->model->orderProductsByCategory($category);
+            if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
+                $this->products = $this->model->orderProductsByDescPriceByCategory($category);
+            } else {
+                $this->products = $this->model->orderProductsByAscPriceByCategory($category);
+            }
         }else{
-            $this->products = $this->model->getProducts();
+            if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
+                $this->products = $this->model->orderProductsByDescPrice();
+            }elseif(isset($_POST["price"]) && $_POST["price"] == "ASC") {
+                $this->products = $this->model->orderProductsByAscPrice();
+            }else{
+                $this->products = $this->model->getProducts();
+            }
         }
-
-
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/listProducts.php');
