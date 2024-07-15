@@ -37,9 +37,32 @@ class Model
             return [];
         }
     }
+    public function orderProductsByAscPriceByCategory($category){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_category_id=?
+                ORDER BY product_price ASC ');
+            $request->execute([$category]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
+    public function orderProductsByDescPriceByCategory($category){
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_category_id=? 
+                       ORDER BY product_price DESC');
+            $request->execute([$category]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: '. $e->getMessage());
+            return [];
+        }
+    }
+
     public function orderProductsByAscPrice(){
         try {
-            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price ASC');
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price ASC ');
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -59,7 +82,10 @@ class Model
     }
     public function orderProductsByCategory($category){
         try {
-            $request = $this->db->prepare('SELECT * FROM products LEFT JOIN categories ON products.product_category_id = categories.category_id WHERE product_category_id =?');
+            $request = $this->db->prepare('SELECT * FROM products 
+                LEFT JOIN categories ON products.product_category_id = categories.category_id 
+                WHERE product_category_id =?
+                ORDER BY product_price ASC');
             $request->execute([$category]);
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -69,7 +95,7 @@ class Model
     }
     public function getProducts(){
         try {
-            $request = $this->db->prepare('SELECT * FROM products');
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_name ASC');
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
