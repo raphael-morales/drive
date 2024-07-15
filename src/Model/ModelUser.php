@@ -47,7 +47,7 @@ class ModelUser
     {
 
         try {
-            $request = $this->db->prepare("SELECT * FROM users WHERE user_email = ?");
+            $request = $this->db->prepare("SELECT * FROM users LEFT JOIN roles ON users.user_role_id = roles.role_id WHERE user_email = ?");
 
             $request->execute([$email]);
 

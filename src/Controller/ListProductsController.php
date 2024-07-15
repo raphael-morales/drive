@@ -20,7 +20,7 @@ class ListProductsController
 
     public function manage()
     {
-        if(isset($_POST['searchQuery'])){
+if(isset($_POST['searchQuery'])){
             $searchQuery = $_POST['searchQuery'];
             $this->products = $this->model->searchProducts($searchQuery);
         }elseif (isset($_GET["category"])){
