@@ -19,8 +19,8 @@ class ModelUser
         try {
 
             $request = $this->db->prepare("INSERT INTO users (user_firstname, user_lastname, user_email, 
-                  user_password, user_address, user_zipcode, user_city, user_phone, user_birthday) 
-                                                 VALUES (?,?,?,?,?,?,?,?,?)");
+                user_password, user_address, user_zipcode, user_city, user_phone, user_birthday) 
+                VALUES (?,?,?,?,?,?,?,?,?)");
             $request->execute([
                 $firstname,
                 $lastname,
