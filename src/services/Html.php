@@ -2,29 +2,49 @@
 
 class Html
 {
-    function CreateTableHtml($dataTable)
+    function CreateTableHtml($dataTable, $dataRoles)
     {
-        $html = '<table class="table table-striped table-bordered border-primary">
+        if (!empty($dataTable)){
+            $html = '<table class="table-bordered">
             <thead>
             <tr>';
-        foreach ($dataTable as $profilAdmin) {
-            foreach ($profilAdmin as $key => $value) {
-                $html .= '<th scope="col">'.$key.'</th>';
+            foreach ($dataTable as $profil) {
+                foreach ($profil as $key => $value) {
+                    $html .= '<th scope="col">'.$key.'</th>';
+                }
+                break;
             }
-            break;
-        }
-        $html .= '</tr></thead>
+            $html .= '</tr></thead>
             <tbody>';
-        foreach ($dataTable as $profilAdmin) {
-            $html .= '<tr>';
-            foreach ($profilAdmin as $key => $value) {
-                $html .= '<td> ' . $value . ' </td>';
+            foreach ($dataTable as $profil) {
+                $html .= '<form action="" method="post"><tr>';
+                foreach ($profil as $key => $value) {
+                    $html .= '<th xmlns="http://www.w3.org/1999/html">';
+                                if ($key == "Role"){
+                                    $html .= '<select name="' . $key . '">';
+                                    foreach ($dataRoles as $roles => $role){
+                                        if ($role["Role"]===$value){
+                                            $html .= '<option selected value="' . $role["Role"] . '">' . $role["Role"] . '</option>';
+                                        }else{
+                                            $html .= '<option value="' . $role["Role"] . '">' . $role["Role"] . '</option>';
+                                        }
+                                    }
+                                    $html .= '</select>';
+                                }else{
+                                    $html .= '<input style="width: 100%" name="' . $key . '" value="' . $value . '">';
+                                }
+                    $html .=   '</th>';
+                }
+
+                $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Enregistrer</button></th>';
+                $html .= '</tr></form>';
             }
-            $html .= '</tr>';
-        }
-        $html .= '</tbody>
+            $html .= '</tbody>
         </table>';
 
-        return $html;
+            return $html;
+        }else{
+           return false;
+        }
     }
 }

@@ -47,6 +47,16 @@ a{
     margin: 0 auto;
 }
 
+.profile-card-table {
+    border: 2px solid black;
+    background-color: rgb(194, 243, 217);
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
 /*home css */
 body {
     height: 100vh;

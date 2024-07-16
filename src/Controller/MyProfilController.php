@@ -12,6 +12,10 @@ class MyProfilController
 
     public $profilsAdmin;
 
+    public $profilsUsers;
+    public $profilsEmployee;
+    public $roles;
+
     public $servicesHtml;
 
 
@@ -34,8 +38,17 @@ class MyProfilController
         }
 
         if (isset($_SESSION["user"]['id']) && $_SESSION["user"]["role"] == "administrateur"){
-            $this->profilsAdmin = $this->model->getAllUserAdmin();
-            $this->profilsAdmin = $this->servicesHtml->CreateTableHtml($this->profilsAdmin);
+            if (!empty($_POST)){
+                if (!empty($_POST["Role"]) && !empty($_POST["Email"])){
+                    $roleId = $this->model->getRoleId($_POST["Role"]);
+                    $this->model->updateUser($roleId["role_id"], $_POST["Email"]);
+                }
+            }
+
+            $this->roles = $this->model->getAllRoles();
+            $this->profilsAdmin = $this->servicesHtml->CreateTableHtml($this->model->getAllUserAdmin(), $this->roles);
+            $this->profilsUsers = $this->servicesHtml->CreateTableHtml($this->model->getAllUsers(), $this->roles);
+            $this->profilsEmployee = $this->servicesHtml->CreateTableHtml($this->model->getAllUsersEmployee(), $this->roles);
         }
 
         include(__DIR__ . "/../view/header.php");
