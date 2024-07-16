@@ -151,6 +151,7 @@ class Model
         }
     }
 
+
     public function getProductById($productId)
     {
         try {
@@ -192,5 +193,6 @@ class Model
             return false;
         }
     }
+
 }
 ?>
