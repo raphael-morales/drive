@@ -6,12 +6,7 @@ class ModelUser
 
     public function __construct()
     {
-        try {
-            $this->db = new PDO('mysql:host=mysql-drivem2i.alwaysdata.net;dbname=drivem2i_drive;charset=utf8', 'drivem2i', '1234@M2i');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            error_log('Connection error: ' . $e->getMessage());
-        }
+        $this->db = Database::getInstance()->getConnection();
     }
     public function addNewUser($firstname, $lastname, $email, $password,$address, $zipcode, $city, $phone, $birthday)
     {
@@ -19,8 +14,8 @@ class ModelUser
         try {
 
             $request = $this->db->prepare("INSERT INTO users (user_firstname, user_lastname, user_email, 
-                  user_password, user_address, user_zipcode, user_city, user_phone, user_birthday) 
-                                                 VALUES (?,?,?,?,?,?,?,?,?)");
+                user_password, user_address, user_zipcode, user_city, user_phone, user_birthday) 
+                VALUES (?,?,?,?,?,?,?,?,?)");
             $request->execute([
                 $firstname,
                 $lastname,
@@ -47,7 +42,7 @@ class ModelUser
     {
 
         try {
-            $request = $this->db->prepare("SELECT * FROM users WHERE user_email = ?");
+            $request = $this->db->prepare("SELECT * FROM users LEFT JOIN roles ON users.user_role_id = roles.role_id WHERE user_email = ?");
 
             $request->execute([$email]);
 

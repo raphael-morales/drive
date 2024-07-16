@@ -6,22 +6,25 @@ class Model
 
     public function __construct()
     {
-        try {
-            $this->db = new PDO('mysql:host=mysql-drivem2i.alwaysdata.net;dbname=drivem2i_drive;charset=utf8', 'drivem2i', '1234@M2i');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            error_log('Connection error: ' . $e->getMessage());
-        }
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function addProduct($name, $category, $picture, $description, $origin, $quantity, $price)
     {
         try {
-            $request = $this->db->prepare('INSERT INTO products (product_name, product_category_id, product_picture, product_description, product_origin, product_quantity, product_price) VALUES (?,?,?,?,?,?,?)');
+            $request = $this->db->prepare('INSERT INTO products (
+                product_name,
+                product_category_id,
+                product_picture,
+                product_description,
+                product_origin,
+                product_quantity,
+                product_price
+            ) VALUES (?,?,?,?,?,?,?)');
             $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
-            var_dump('Error : ' . $e->getMessage());
+            error_log('Error : ' . $e->getMessage());
             return false;
         }
     }
@@ -37,54 +40,145 @@ class Model
             return [];
         }
     }
-    public function orderProductsByAscPrice(){
+    public function orderProductsByAscPriceByCategory($category)
+    {
         try {
-            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price ASC');
-            $request->execute();
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_category_id=?
+                ORDER BY product_price ASC ');
+            $request->execute([$category]);
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log('Error: '. $e->getMessage());
+            error_log('Error: ' . $e->getMessage());
             return [];
         }
     }
-    public function orderProductsByDescPrice(){
+    public function orderProductsByDescPriceByCategory($category)
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_category_id=? 
+                       ORDER BY product_price DESC');
+            $request->execute([$category]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function orderProductsByAscPrice()
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price ASC ');
+            $request->execute();
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+    public function orderProductsByDescPrice()
+    {
         try {
             $request = $this->db->prepare('SELECT * FROM products ORDER BY product_price DESC');
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log('Error: '. $e->getMessage());
+            error_log('Error: ' . $e->getMessage());
             return [];
         }
     }
-    public function orderProductsByCategory($category){
+
+    public function searchProductByAscPrice($word)
+    {
         try {
-            $request = $this->db->prepare('SELECT * FROM products LEFT JOIN categories ON products.product_category_id = categories.category_id WHERE product_category_id =?');
+            $request = $this->db->prepare('SELECT * FROM products WHERE `product_name` LIKE ? ORDER BY product_price ASC;');
+            $request->execute(["%$word%"]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function searchProductByDescPrice($word)
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products WHERE `product_name` LIKE ? ORDER BY product_price DESC;');
+            $request->execute(["%$word%"]);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function orderProductsByCategory($category)
+    {
+        try {
+            $request = $this->db->prepare('SELECT * FROM products 
+                LEFT JOIN categories ON products.product_category_id = categories.category_id 
+                WHERE product_category_id =?
+                ORDER BY product_price ASC');
             $request->execute([$category]);
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log('Error: '. $e->getMessage());
+            error_log('Error: ' . $e->getMessage());
             return [];
         }
     }
-    public function getProducts(){
+    public function getProducts()
+    {
         try {
-            $request = $this->db->prepare('SELECT * FROM products');
+            $request = $this->db->prepare('SELECT * FROM products ORDER BY product_name ASC');
             $request->execute();
             return $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log('Error: '. $e->getMessage());
+            error_log('Error: ' . $e->getMessage());
             return [];
         }
     }
-    public function searchProducts($word){
+
+    public function searchProducts($word)
+    
+    {
         try {
             $request = $this->db->prepare('SELECT * FROM products WHERE product_name LIKE ?');
             $request->execute(["%$word%"]);
-            return $request->fetchAll(PDO::FETCH_ASSOC);  
-        }catch (PDOException $e){
-            error_log('Error: '. $e->getMessage());
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
             return [];
         }
+    }
+
+    public function newOrder($user_id, $products)
+    {
+
+        try {
+
+            $this->db->beginTransaction();
+
+            $request = $this->db->prepare('INSERT INTO orders(orders_user_id) VALUE (?)');
+            $request->execute([$user_id]);
+
+            $order_id = $this->db->lastInsertId();
+
+            $request = $this->db->prepare('INSERT INTO orders_products(
+                order_products_order_id,
+                order_products_product_id,
+                order_products_product_quantity,
+                order_products_product_price
+            ) VALUE (?,?,?,?)');
+
+            for ($i = 0; $i < count($products); $i++) {
+                $request->execute([$order_id, $products[$i]["product_id"], $products[$i]["product_quantity"], $products[$i]["product_price"]]);
+            }
+
+            $this->db->commit();
+        } catch (Exception $e) {
+
+            $this->db->rollBack();
+            var_dump($e->getMessage());
+        };
     }
 }
