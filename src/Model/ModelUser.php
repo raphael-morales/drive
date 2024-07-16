@@ -60,4 +60,25 @@ class ModelUser
 
         }
     }
+
+    public function getAllUserAdmin(){
+        try {
+            $request =  $this->db->query("SELECT user_lastname AS Nom ,
+                user_firstname AS Prenom,
+                user_email AS Email,
+                user_address AS Adresse,
+                user_zipcode AS Code_postal,
+                user_city AS Ville,
+                user_phone AS Téléphone,
+                user_birthday AS Anniversaire,
+                user_creation_date AS Inscription
+                FROM users WHERE user_role_id=1");
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        }catch (Exception $e) {
+
+            var_dump("Erreur : " . $e->getMessage());
+            return null;
+
+        }
+    }
 }

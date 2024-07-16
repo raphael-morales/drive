@@ -10,6 +10,10 @@ class MyProfilController
     public $displayValue;
     public $profil;
 
+    public $profilsAdmin;
+
+    public $servicesHtml;
+
 
     public function __construct()
     {
@@ -19,6 +23,7 @@ class MyProfilController
         $this->param = "index.php?page=myProfil";
         $this->altParam = "retour";
         $this->displayValue = "retour";
+        $this->servicesHtml = new Html();
 
     }
 
@@ -26,6 +31,11 @@ class MyProfilController
     {
         if (isset($_SESSION["user"]['id'])) {
             $this->profil = $this->model->getOneUser($_SESSION['user']['email']);
+        }
+
+        if (isset($_SESSION["user"]['id']) && $_SESSION["user"]["role"] == "administrateur"){
+            $this->profilsAdmin = $this->model->getAllUserAdmin();
+            $this->profilsAdmin = $this->servicesHtml->CreateTableHtml($this->profilsAdmin);
         }
 
         include(__DIR__ . "/../view/header.php");
