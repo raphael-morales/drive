@@ -10,6 +10,7 @@ class ListProductsController
     public $altParam;
     public $displayValue;
     public $products;
+    public $isAdmin;
 
     public function __construct()
     {
@@ -17,8 +18,13 @@ class ListProductsController
         $this->msg = null;
         $this->title = "Liste des produits";
         $this->categories = $this->model->getCategories();
+        $this->isAdmin = $this->checkAdmin();
     }
 
+    private function checkAdmin()
+    {
+        return isset($_SESSION['user']) && $_SESSION['user']['role'] === 'administrateur';
+    }
     public function manage()
     {
         if (isset($_POST['searchQuery'])) {
@@ -47,6 +53,10 @@ class ListProductsController
             } else {
                 $this->products = $this->model->getProducts();
             }
+        }
+
+        if (isset($_POST['product_quantity_ordered'])){
+            
         }
 
         include(__DIR__ . '/../view/header.php');

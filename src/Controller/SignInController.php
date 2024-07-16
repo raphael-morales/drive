@@ -34,7 +34,7 @@ class SignInController
                         'firstname'=> $user["user_firstname"],
                         'email' => $user["user_email"],
                         'id'    => $user['user_id'],
-                        'role'  => $user['role_name']
+                        'role'  => $user['role_name'],
                     ];
 
                     header('Location: index.php');

@@ -19,17 +19,19 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <?php if (isset($_SESSION['user']) AND !empty($_SESSION['user'])) { ?>
-                        <div class="d-flex ms-3">
-                            <ul class="navbar-nav mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.php?page=listProducts">Produits</a>
-                                </li>
-                                <li class="nav-item">
+                    <div class="d-flex ms-3">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=listProducts">Produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <?php if ($_SESSION['user']['role'] === 'administrateur') { ?>
                                     <a class="nav-link" href="index.php?page=addProduct">Ajouter</a>
-                                </li>
-                            </ul>
-                        </div>                    
-                        <form class="d-flex me-3" role="search" method="POST" action="index.php?page=listProducts">
+                                <?php } ?>
+                            </li>
+                        </ul>
+                    </div>
+                    <form class="d-flex me-3" role="search" method="POST" action="index.php?page=listProducts">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                                    name="searchQuery" value='<?= isset($_SESSION["searchQuery"]) ? $_SESSION["searchQuery"] : "" ?>'>
                             <button class="btn btn-outline-success" type="submit">Rechercher</button>
@@ -40,6 +42,11 @@
                             <?php if (isset($_SESSION['user']) AND !empty($_SESSION['user'])) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?page=myProfil" alt="lien vers la page mon profil">Bonjour, <?= $_SESSION["user"]["firstname"] ?></a>
+                                </li>
+                                <li class="nav-item">
+                                    <?php if ($_SESSION['user']['role'] === 'utilisateur') { ?>
+                                    <a class="nav-link" href="index.php?page=shoppingCart">Panier</a>
+                                    <?php } ?>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?logout=true">Déconnexion</a>
