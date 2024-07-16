@@ -31,7 +31,7 @@
                         </div>                    
                         <form class="d-flex me-3" role="search" method="POST" action="index.php?page=listProducts">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                                   name="searchQuery" value='<?= $_SESSION["searchQuery"] ? $_SESSION["searchQuery"] : "" ?>'>
+                                   name="searchQuery" value='<?= isset($_SESSION["searchQuery"]) ? $_SESSION["searchQuery"] : "" ?>'>
                             <button class="btn btn-outline-success" type="submit">Rechercher</button>
                         </form>
                     <?php } ?>

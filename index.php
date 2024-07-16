@@ -15,6 +15,7 @@ require('src/Controller/MyProfilController.php');
 require('src/Controller/ListProductsController.php');
 require('src/Model/Model.php');
 require('src/Model/ModelUser.php');
+require('src/services/Singleton.php');
 
 
 $page = filter_input(INPUT_GET, "page");
