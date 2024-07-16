@@ -55,7 +55,7 @@ class ListProductsController
             }
         }
 
-        if (isset($_POST['quantityOrdered'])){
+        if (isset($_POST['product_quantity_ordered'])){
             
         }
 
