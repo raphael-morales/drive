@@ -186,7 +186,7 @@ class Model
     public function getProductById($productId)
     {
         try {
-            $request = $this->db->prepare('SELECT * FROM products WHERE id = ?');
+            $request = $this->db->prepare('SELECT * FROM products WHERE product_id = ?');
             $request->execute([$productId]);
             return $request->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
