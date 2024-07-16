@@ -35,7 +35,6 @@ class SignInController
                         'email' => $user["user_email"],
                         'id'    => $user['user_id'],
                         'role'  => $user['role_name'],
-                        'basket' => []
                     ];
 
                     header('Location: index.php');
