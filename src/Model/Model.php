@@ -6,18 +6,21 @@ class Model
 
     public function __construct()
     {
-        try {
-            $this->db = new PDO('mysql:host=mysql-drivem2i.alwaysdata.net;dbname=drivem2i_drive;charset=utf8', 'drivem2i', '1234@M2i');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            error_log('Connection error: ' . $e->getMessage());
-        }
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function addProduct($name, $category, $picture, $description, $origin, $quantity, $price)
     {
         try {
-            $request = $this->db->prepare('INSERT INTO products (product_name, product_category_id, product_picture, product_description, product_origin, product_quantity, product_price) VALUES (?,?,?,?,?,?,?)');
+            $request = $this->db->prepare('INSERT INTO products (
+                product_name,
+                product_category_id,
+                product_picture,
+                product_description,
+                product_origin,
+                product_quantity,
+                product_price
+            ) VALUES (?,?,?,?,?,?,?)');
             $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
@@ -37,7 +40,6 @@ class Model
             return [];
         }
     }
-
     public function orderProductsByAscPriceByCategory($category)
     {
         try {
@@ -50,7 +52,6 @@ class Model
             return [];
         }
     }
-
     public function orderProductsByDescPriceByCategory($category)
     {
         try {
@@ -75,7 +76,6 @@ class Model
             return [];
         }
     }
-
     public function orderProductsByDescPrice()
     {
         try {
@@ -126,7 +126,6 @@ class Model
             return [];
         }
     }
-
     public function getProducts()
     {
         try {
@@ -140,6 +139,7 @@ class Model
     }
 
     public function searchProducts($word)
+    
     {
         try {
             $request = $this->db->prepare('SELECT * FROM products WHERE product_name LIKE ?');
@@ -151,48 +151,34 @@ class Model
         }
     }
 
-
-    public function getProductById($productId)
+    public function newOrder($user_id, $products)
     {
-        try {
-            $request = $this->db->prepare('SELECT * FROM products WHERE product_id = ?');
-            $request->execute([$productId]);
-            return $request->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log('Error: ' . $e->getMessage());
-            return null;
-        }
-    }
 
-    public function updateProduct($productId, $name, $category, $picture, $description, $origin, $quantity, $price)
-    {
         try {
-            $request = $this->db->prepare('UPDATE products SET
-            product_name = ?,
-            product_category_id = ?,
-            product_picture = ?,
-            product_description = ?,
-            product_origin = ?,
-            product_quantity = ?,
-            product_price = ?
-                WHERE product_id = ?');
-            return $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price, $productId]);
-        } catch (PDOException $e) {
-            error_log('Error: ' . $e->getMessage());
-            return false;
-        }
-    }
 
-    public function deleteProduct($productId)
-    {
-        try {
-            $request = $this->db->prepare('DELETE FROM products WHERE product_id = ?');
-            return $request->execute([$productId]);
-        } catch (PDOException $e) {
-            error_log('Error: ' . $e->getMessage());
-            return false;
-        }
-    }
+            $this->db->beginTransaction();
 
+            $request = $this->db->prepare('INSERT INTO orders(orders_user_id) VALUE (?)');
+            $request->execute([$user_id]);
+
+            $order_id = $this->db->lastInsertId();
+
+            $request = $this->db->prepare('INSERT INTO orders_products(
+                order_products_order_id,
+                order_products_product_id,
+                order_products_product_quantity,
+                order_products_product_price
+            ) VALUE (?,?,?,?)');
+
+            for ($i = 0; $i < count($products); $i++) {
+                $request->execute([$order_id, $products[$i]["product_id"], $products[$i]["product_quantity"], $products[$i]["product_price"]]);
+            }
+
+            $this->db->commit();
+        } catch (Exception $e) {
+
+            $this->db->rollBack();
+            var_dump($e->getMessage());
+        };
+    }
 }
-?>

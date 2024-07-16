@@ -1,5 +1,5 @@
 <h1 style="text-align: center"><?= $this->title ?></h1>
-<?php var_dump($_SESSION) ?>
+
 <div class="d-flex flex-wrap gap-2 w-75 mx-auto justify-content-evenly py-2">
     <?php foreach ($this->categories as $category) {
         echo '<button type="button" class="btn btn-primary w-25 text-truncate ">
@@ -13,7 +13,6 @@
         <a class="text-light" href="index.php?page=listProducts">Tous les produits</a>
     </button>
 </div>
-<?php //var_dump($this->products); ?>
 
 <form class="d-flex justify-content-center gap-2 m-4" action="" method="post">
     <select class="form-select w-25" aria-label="Default select example" name="price">
