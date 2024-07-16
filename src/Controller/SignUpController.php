@@ -61,7 +61,6 @@ class SignUpController
                         'email' => $_POST["email"],
                         'id'    => $idUser,
                         'role'  => null,
-                        'basket' => []
                     ];
 
                     header('Location: index.php');

@@ -38,17 +38,17 @@
                     <button class="btn btn-danger">
                         <a class="text-light" href="index.php?page=editProduct&product_id=<?= $product['product_id'] ?>">Modifier le produit</a>
                     </button>
+                <?php }
+                    if ($_SESSION["user"]["role"] == "utilisateur") { ?>
+                        <form action="" method="POST">
+                            <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
+                            <select name="quantityOrdered" id="quantityOrdered" >
+                                <?php for ($i = 1; $i <= $product['product_quantity']; $i++) {?>
+                                    <option value="<?= $i?>"><?= $i?></option>
+                                <?php }?>
+                            </select>
+                        </form>
                 <?php } ?>
-
-                <form action="" method="POST">
-                    <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
-                    <select  name="quantityOrdered" id="quantityOrdered" >
-                        <?php for ($i = 1; $i <= $product['product_quantity']; $i++) {?>
-                            <option value="<?= $i?>"><?= $i?></option>
-                        <?php }?>
-                    </select>
-                </form>
-
             </div>
         </div>
     <?php } ?>
