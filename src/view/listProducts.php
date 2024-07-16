@@ -42,7 +42,7 @@
 
                 <form action="" method="POST">
                     <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
-                    <select  name="quantityOrdered" id="quantityOrdered" >
+                    <select  name="product_quantity_ordered" id="product_quantity_ordered" >
                         <?php for ($i = 1; $i <= $product['product_quantity']; $i++) {?>
                             <option value="<?= $i?>"><?= $i?></option>
                         <?php }?>
