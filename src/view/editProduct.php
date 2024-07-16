@@ -7,9 +7,13 @@
     <div class="form-group mb-3">
         <label for="category">Catégorie</label>
         <select class="form-control" id="category" name="category">
-            <option value="<?= $this->product['product_category'] ?>">- -</option>
             <?php foreach ($this->categories as $cat) {
-                echo "<option value='{$cat['category_id']}'>{$cat['category_name']}</option>";
+                if ($cat['category_id'] === $this->product['product_category_id']){
+                    echo "<option selected value='{$cat['category_id']}'>{$cat['category_name']}</option>";
+                }else{
+                    echo "<option value='{$cat['category_id']}'>{$cat['category_name']}</option>";
+                }
+
             } ?>
         </select>
     </div>
