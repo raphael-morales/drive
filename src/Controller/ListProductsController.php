@@ -49,6 +49,10 @@ class ListProductsController
             }
         }
 
+        if (isset($_POST['quantityOrdered'])){
+            
+        }
+
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/listProducts.php');
         include(__DIR__ . '/../view/footer.php');

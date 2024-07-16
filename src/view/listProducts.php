@@ -1,4 +1,5 @@
 <h1 style="text-align: center"><?= $this->title ?></h1>
+<?php var_dump($_SESSION) ?>
 <div class="d-flex flex-wrap gap-2 w-75 mx-auto justify-content-evenly py-2">
     <?php foreach ($this->categories as $category) {
         echo '<button type="button" class="btn btn-primary w-25 text-truncate ">
@@ -33,7 +34,14 @@
                 <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
                 <p class="card-text">Origine : <?= $product['product_origin'] ?></p>
                 <p class="card-text">Prix : <?= $product['product_price'] ?> €</p>
-                <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
+                <form action="" method="POST">
+                    <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
+                    <select  name="quantityOrdered" id="quantityOrdered" >
+                        <?php for ($i = 1; $i <= $product['product_quantity']; $i++) {?>
+                            <option value="<?= $i?>"><?= $i?></option>
+                        <?php }?>
+                    </select>
+                </form>
             </div>
         </div>
     <?php } ?>
