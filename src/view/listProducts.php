@@ -34,6 +34,11 @@
                 <p class="card-text">Origine : <?= $product['product_origin'] ?></p>
                 <p class="card-text">Prix : <?= $product['product_price'] ?> €</p>
                 <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
+                <?php if ($this->isAdmin) { ?>
+                    <button class="btn btn-danger">
+                        <a class="text-light" href="index.php?page=editProduct&product_id=<?= $product['product_id'] ?>">Modifier le produit</a>
+                    </button>
+                <?php } ?>
             </div>
         </div>
     <?php } ?>
