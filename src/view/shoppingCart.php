@@ -1,6 +1,6 @@
 <h1 style="text-align: center"><?= $this->title ?></h1>
 
-<form class="container-fluid d-flex flex-wrap justify-content-center">
+<div class="container-fluid d-flex flex-wrap justify-content-center">
     <?php if (empty($this->products)) { ?>
         <p>Votre panier est vide.</p>
     <?php } else { ?>
@@ -29,4 +29,5 @@
             } ?>
         <?php } ?>
     <?php } ?>
-</form>
+</div>
+<a href="index.php?page=shoppingCart&valid=true" alt="Terminer ma commande" class="btn btn-down">Terminer ma commande</a>

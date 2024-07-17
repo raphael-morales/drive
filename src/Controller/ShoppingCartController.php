@@ -25,34 +25,13 @@ class ShoppingCartController
 
     public function manage()
     {
-        // if (isset($_POST['searchQuery'])) {
-        //     $searchQuery = $_POST['searchQuery'];
-        //     $this->products = $this->model->searchProducts($searchQuery);
-        //     $_SESSION["searchQuery"] = $_POST['searchQuery'];
-        // } elseif (isset($_GET["category"])) {
-        //     $category = $_GET["category"];
-        //     if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
-        //         $this->products = $this->model->orderProductsByDescPrice($category);
-        //     } else {
-        //         $this->products = $this->model->orderProductsByAscPrice($category);
-        //     }
-        // } elseif (isset($_SESSION["searchQuery"])) {
-        //     $searchQuery = $_SESSION["searchQuery"];
-        //     if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
-        //         $this->products = $this->model->searchProducts($searchQuery);
-        //     } else {
-        //         $this->products = $this->model->searchProducts($searchQuery);
-        //     }
-        // } else {
-        //     if (isset($_POST["price"]) && $_POST["price"] == "DESC") {
-        //         $this->products = $this->model->orderProductsByDescPrice();
-        //     } elseif (isset($_POST["price"]) && $_POST["price"] == "ASC") {
-        //         $this->products = $this->model->orderProductsByAscPrice();
-        //     } else {
-        //         $this->products = $this->model->getProducts();
-        //     }
-        // }
-
+        if (isset($_SESSION["user"])) {
+            if (isset($_GET["valid"])) {
+                $this->model->newOrder($_SESSION["user"]["id"], $_SESSION["user"]["basket"]);
+            };
+        } else {
+            header("Location: index.php?page=signIn");
+        };
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/shoppingCart.php');
         include(__DIR__ . '/../view/footer.php');
