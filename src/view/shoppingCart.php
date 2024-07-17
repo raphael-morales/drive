@@ -21,7 +21,7 @@
                                 <span class="card-text">Quantité :
                                 <select name="product_quantity_ordered" id="product_quantity_ordered">
                                     <?php for ($i = 1; $i <= $product['product_quantity']; $i++) { ?>
-                                        <?php if ($i == $product_ordered["product_quantity_ordered"]) { ?>
+                                        <?php if ($i === $product_ordered["quantity_ordered"]) { ?>
                                             <option selected value="<?= $i ?>"><?= $i ?></option>
                                         <?php } else { ?>
                                             <option value="<?= $i ?>"><?= $i ?></option>
