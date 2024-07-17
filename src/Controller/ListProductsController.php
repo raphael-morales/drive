@@ -59,7 +59,7 @@ class ListProductsController
         if (isset($_POST['quantity_ordered'])) {
             if (isset($_SESSION['user']['basket'])) {
                 foreach ($_SESSION['user']['basket'] as $key => $p) {
-                    if ($p['product_id'] === $_POST["product_id"]) {
+                    if ($p['product_id'] == $_POST["product_id"]) {
                         $_SESSION['user']['basket'][$key]['quantity_ordered'] = strval(+$_POST['quantity_ordered'] + +$p['quantity_ordered']);
                     } else {
                         array_push($_SESSION["user"]["basket"], [
