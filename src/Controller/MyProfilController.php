@@ -18,6 +18,8 @@ class MyProfilController
     public $profilsEmployee;
     public $roles;
     public $orders;
+    public $orderUser;
+    public $totalPrice = 0;
 
     public $servicesHtml;
 
@@ -54,6 +56,13 @@ class MyProfilController
             $this->profilsUsers = $this->servicesHtml->CreateTableHtml($this->model->getAllUsers(), $this->roles);
             $this->profilsEmployee = $this->servicesHtml->CreateTableHtml($this->model->getAllUsersEmployee(), $this->roles);
             $this->orders = $this->servicesHtml->CreateTableHtml($this->modelOrder->getAllOrders(), "", true);
+            
+            if (isset($_POST["Commande"])){
+                $this->orderUser = $this->modelOrder->getOrder($_POST["Commande"]);
+                foreach ($this->orderUser as $product){
+                    $this->totalPrice += floatval($product["order_products_product_price"]) * floatval($product["order_products_product_quantity"]);
+                }
+            }
         }
 
         include(__DIR__ . "/../view/header.php");

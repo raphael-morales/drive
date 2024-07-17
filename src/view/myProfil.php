@@ -1,4 +1,3 @@
-<?php var_dump($_POST); ?>
 <div style="display: flex; justify-content: space-around">
     <section>
         <h1 class="text-center"><?= $this->title ?></h1>
@@ -14,13 +13,24 @@
         </div>
     </section>
     <section>
-        <h1 class="text-center"><?= $this->title ?></h1>
+        <h1 class="text-center">Liste des commandes en cours</h1>
         <div class="order-card mx-auto">
             <?= $this->orders ?>
-<!--            --><?php //foreach ($this->orders as $order){ ?>
-<!--                <p>Numero de commande : --><?php //= $order["orders_order_id"] . "||" . $order["orders_creation_date"] ?><!--</p>-->
-<!--            --><?php //} ?>
         </div>
+    </section>
+
+    <section class="order-modal" style="<?= isset($_POST['Commande']) ? 'display: block' : 'display:none' ?>; width: 30%">
+        <?php if (isset($_POST['Commande'])){ ?>
+        <h1 class="text-center">commande N°<?= $_POST['Commande'] ?></h1>
+        <div class="order-card mx-auto">
+            <?php foreach ($this->orderUser as $product){ ?>
+                <p style="text-overflow: ellipsis;"><b>Produit</b> : <?= $product["product_name"] ?></p>
+                <p>Quantité : <?= $product["order_products_product_quantity"] ?></p>
+                <hr>
+            <?php } ?>
+            <p style="text-align: end;"><b>Total :<?= $this->totalPrice ?> €</b></p>
+        </div>
+        <?php } ?>
     </section>
 </div>
 <div>
