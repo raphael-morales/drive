@@ -13,7 +13,6 @@ class EditProductController
 
     public function __construct()
     {
-        session_start();
         $this->model = new Model();
         $this->msg = null;
         $this->title = "Modifier le Produit";
