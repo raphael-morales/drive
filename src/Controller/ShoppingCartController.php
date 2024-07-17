@@ -57,7 +57,7 @@ class ShoppingCartController
             if (isset($_POST["idProduct"])){
                 $idProduct = intval($_POST["idProduct"]);
                 foreach ($_SESSION["user"]["basket"] as $key => $productsBasket){
-                    if ($productsBasket["product_id"] == $idProduct){
+                    if ($productsBasket["product_id"] === $idProduct){
                         array_splice($_SESSION["user"]["basket"], $key);
                     }
                 }

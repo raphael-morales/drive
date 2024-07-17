@@ -18,7 +18,6 @@
                                 <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
                                 <label for="product_price">Prix : </label>
                                 <p class="card-text"><?= $product['product_price'] ?> €</p>
-                                       name="product_price" id="product_price"> €</input>
                                 <span class="card-text">Quantité :
                                 <select name="product_quantity_ordered" id="product_quantity_ordered">
                                     <?php for ($i = 1; $i <= $product['product_quantity']; $i++) { ?>
