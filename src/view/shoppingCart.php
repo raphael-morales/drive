@@ -15,9 +15,9 @@
                             <h5 class="card-title text-truncate"><?= $product['product_name'] ?></h5>
                             <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
                             <label for="product_price">Prix : </label>
-                            <input readonly class="card-text" value="<?= $product['product_price'] ?>" name="product_price" id="product_price"> €</input>
-                            <span class="card-text">Quantité : <?= $product_ordered["product_quantity_ordered"] ?></span>
-                            <select value="<?= $product_ordered["product_quantity_ordered"] ?>" name="product_quantity_ordered" id="product_quantity_ordered">
+                            <p class="card-text"><?= $product['product_price'] ?> €</p>
+                            <span class="card-text">Quantité : <?= $product_ordered["quantity_ordered"] ?></span>
+                            <select value="<?= $product_ordered["quantity_ordered"] ?>" name="quantity_ordered" id="quantity_ordered">
                                 <?php for ($i = 1; $i <= $product['product_quantity']; $i++) { ?>
                                     <option value="<?= $i ?>"><?= $i ?></option>
                                 <?php } ?>

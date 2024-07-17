@@ -20,19 +20,6 @@ class ShoppingCartController
         $this->title = "Mes produits";
         $this->categories = $this->model->getCategories();
         $this->products = $this->model->getProducts();
-        $_SESSION["user"]["basket"] = [
-            [
-                "product_id" => 2,
-                "product_price" => 6.99,
-                "product_quantity_ordered" => 4,
-            ],
-
-            [
-                "product_id" => 7,
-                "product_price" => 5.70,
-                "product_quantity_ordered" => 2,
-            ]
-        ];
     }
 
 
