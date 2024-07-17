@@ -38,3 +38,4 @@
         <?php } ?>
     <?php } ?>
 </div>
+<a href="index.php?page=shoppingCart&valid=true" alt="Terminer ma commande" class="btn btn-down">Terminer ma commande</a>
