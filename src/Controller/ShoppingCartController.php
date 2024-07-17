@@ -47,6 +47,7 @@ class ShoppingCartController
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/shoppingCart.php');
+        include(__DIR__ . '/../view/paymentBasket.php');
         include(__DIR__ . '/../view/footer.php');
     }
 }
