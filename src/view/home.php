@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <main>
     <section class="hero">
