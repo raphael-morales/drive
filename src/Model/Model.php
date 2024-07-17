@@ -139,7 +139,7 @@ class Model
     }
 
     public function searchProducts($word)
-    
+
     {
         try {
             $request = $this->db->prepare('SELECT * FROM products WHERE product_name LIKE ?');
@@ -171,7 +171,7 @@ class Model
             ) VALUE (?,?,?,?)');
 
             for ($i = 0; $i < count($products); $i++) {
-                $request->execute([$order_id, $products[$i]["product_id"], $products[$i]["product_quantity"], $products[$i]["product_price"]]);
+                $request->execute([$order_id, $products[$i]["product_id"], $products[$i]["quantity_ordered"], $products[$i]["product_price"]]);
             }
 
             $this->db->commit();
@@ -218,7 +218,8 @@ class Model
                 product_origin = ?,
                 product_quantity = ?,
                 product_price = ?
-                WHERE product_id = ?");
+                WHERE product_id = ?"
+            );
             return $request->execute([$name, $category, $picture, $description, $origin, $quantity, $price, $productId]);
         } catch (PDOException $e) {
             error_log('Error: ' . $e->getMessage());
