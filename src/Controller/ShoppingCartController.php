@@ -32,6 +32,19 @@ class ShoppingCartController
         } else {
             header("Location: index.php?page=signIn");
         };
+
+
+        if (!empty($_POST)){
+            if (isset($_POST["idProduct"])){
+                $idProduct = intval($_POST["idProduct"]);
+                foreach ($_SESSION["user"]["basket"] as $key => $productsBasket){
+                    if ($productsBasket["product_id"] === $idProduct){
+                        array_splice($_SESSION["user"]["basket"], $key);
+                    }
+                }
+            }
+        }
+
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/shoppingCart.php');
         include(__DIR__ . '/../view/footer.php');
