@@ -38,14 +38,17 @@
                         </form>
                     <?php } ?>
                     <div class="d-flex <?php if (!isset($_SESSION['user'])) echo "ms-auto" ?>">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
+                        <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center">
                             <?php if (isset($_SESSION['user']) AND !empty($_SESSION['user'])) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?page=myProfil" alt="lien vers la page mon profil">Bonjour, <?= $_SESSION["user"]["firstname"] ?></a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item position-relative">
                                     <?php if ($_SESSION['user']['role'] === 'utilisateur') { ?>
-                                    <a class="nav-link" href="index.php?page=shoppingCart">Panier</a>
+                                        <?php if (isset($_SESSION['user']['basket'])) { ?> 
+                                            <span class="bg-danger text-light position-absolute top-0 end-0 rounded-circle px-2"><?= isset($_SESSION['user']['basket']) ?? count($_SESSION['user']['basket']) ?></span>
+                                        <?php } ?>
+                                        <a class="nav-link" href="index.php?page=shoppingCart"><img src="src/public/img/shoppingCart.svg" alt="panier" style="width: 48px"></a>
                                     <?php } ?>
                                 </li>
                                 <li class="nav-item">
