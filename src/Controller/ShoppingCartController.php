@@ -20,19 +20,6 @@ class ShoppingCartController
         $this->title = "Mes produits";
         $this->categories = $this->model->getCategories();
         $this->products = $this->model->getProducts();
-        $_SESSION["user"]["basket"] = [
-            [
-                "product_id" => 2,
-                "product_price" => 6.99,
-                "product_quantity_ordered" => 4,
-            ],
-
-            [
-                "product_id" => 7,
-                "product_price" => 5.70,
-                "product_quantity_ordered" => 2,
-            ]
-        ];
     }
 
 
@@ -65,6 +52,17 @@ class ShoppingCartController
         //         $this->products = $this->model->getProducts();
         //     }
         // }
+
+        if (!empty($_POST)){
+            if (isset($_POST["idProduct"])){
+                $idProduct = intval($_POST["idProduct"]);
+                foreach ($_SESSION["user"]["basket"] as $key => $productsBasket){
+                    if ($productsBasket["product_id"] === $idProduct){
+                        array_splice($_SESSION["user"]["basket"], $key);
+                    }
+                }
+            }
+        }
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/shoppingCart.php');
