@@ -2,7 +2,7 @@
 
 class Html
 {
-    function CreateTableHtml($dataTable, $dataRoles)
+    function CreateTableHtml($dataTable, $dataRoles, $bool=false)
     {
         if (!empty($dataTable)){
             $html = '<table class="table-bordered">
@@ -36,7 +36,11 @@ class Html
                     $html .=   '</th>';
                 }
 
-                $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Enregistrer</button></th>';
+                if (!$bool){
+                    $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Enregistrer</button></th>';
+                }else{
+                    $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Traiter</button></th>';
+                }
                 $html .= '</tr></form>';
             }
             $html .= '</tbody>

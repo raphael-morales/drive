@@ -3,6 +3,8 @@
 class MyProfilController
 {
     public $model;
+
+    public $modelOrder;
     public $msg;
     public $title;
     public $param;
@@ -15,6 +17,7 @@ class MyProfilController
     public $profilsUsers;
     public $profilsEmployee;
     public $roles;
+    public $orders;
 
     public $servicesHtml;
 
@@ -22,6 +25,7 @@ class MyProfilController
     public function __construct()
     {
         $this->model = new ModelUser();
+        $this->modelOrder = new ModelOrders();
         $this->msg = null;
         $this->title = "Mon Profil";
         $this->param = "index.php?page=myProfil";
@@ -49,6 +53,7 @@ class MyProfilController
             $this->profilsAdmin = $this->servicesHtml->CreateTableHtml($this->model->getAllUserAdmin(), $this->roles);
             $this->profilsUsers = $this->servicesHtml->CreateTableHtml($this->model->getAllUsers(), $this->roles);
             $this->profilsEmployee = $this->servicesHtml->CreateTableHtml($this->model->getAllUsersEmployee(), $this->roles);
+            $this->orders = $this->servicesHtml->CreateTableHtml($this->modelOrder->getAllOrders(), "", true);
         }
 
         include(__DIR__ . "/../view/header.php");
