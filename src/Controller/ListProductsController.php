@@ -54,14 +54,38 @@ class ListProductsController
                 $this->products = $this->model->getProducts();
             }
         }
+        // unset($_SESSION["user"]["basket"]);
 
-        if (isset($_POST['quantityOrdered'])){
-            
-        }
+        if (isset($_POST['quantity_ordered'])) {
+            if (isset($_SESSION['user']['basket'])) {
+                foreach ($_SESSION['user']['basket'] as $key => $p) {
+                    if ($p['product_id'] === $_POST["product_id"]) {
+                        $_SESSION['user']['basket'][$key]['quantity_ordered'] = strval(+$_POST['quantity_ordered'] + +$p['quantity_ordered']);
+                    } else {
+                        array_push($_SESSION["user"]["basket"], [
+                            'product_id' => $_POST["product_id"],
+                            'product_price' => $_POST["product_price"],
+                            'quantity_ordered' => $_POST["quantity_ordered"]
+                        ]);
+                    };
+                };
+            } else {
+                $_SESSION["user"]["basket"] = [
+                    [
+                        'product_id' => $_POST["product_id"],
+                        'product_price' => $_POST["product_price"],
+                        'quantity_ordered' => $_POST["quantity_ordered"]
+                    ],
+                ];
+            };
+        };
+
+        if (isset($_SESSION["user"]["basket"])) {
+            var_dump($_SESSION["user"]["basket"]);
+        };
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/listProducts.php');
         include(__DIR__ . '/../view/footer.php');
-
     }
 }

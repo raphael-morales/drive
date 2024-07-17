@@ -60,7 +60,7 @@ class SignUpController
                         'firstname'=> $_POST["firstname"],
                         'email' => $_POST["email"],
                         'id'    => $idUser,
-                        'role'  => null,
+                        'role'  => "utilisateur",
                     ];
 
                     header('Location: index.php');

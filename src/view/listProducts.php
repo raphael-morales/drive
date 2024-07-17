@@ -3,11 +3,11 @@
 <div class="d-flex flex-wrap gap-2 w-75 mx-auto justify-content-evenly py-2">
     <?php foreach ($this->categories as $category) {
         echo '<button type="button" class="btn btn-primary w-25 text-truncate ">
-                <a class="text-light" href="index.php?page=listProducts&category='.$category["category_id"].'">    
-                    '.$category["category_name"].'
+                <a class="text-light" href="index.php?page=listProducts&category=' . $category["category_id"] . '">    
+                    ' . $category["category_name"] . '
                 </a>
               </button>';
-        }
+    }
     ?>
     <button class="btn btn-primary w-25 text-truncate">
         <a class="text-light" href="index.php?page=listProducts">Tous les produits</a>
@@ -26,29 +26,32 @@
 <div class="container-fluid d-flex flex-wrap justify-content-center gap-2">
     <?php foreach ($this->products as $product) { ?>
         <div class="card p-2" style="width: 18rem;">
-            <img src="<?= $product['product_picture'] ?>" class="card-img-top m-auto"
-                 alt="<?= $product['product_name'] ?>" style="max-height:150px; max-width: 150px;">
+            <img src="<?= $product['product_picture'] ?>" class="card-img-top m-auto" alt="<?= $product['product_name'] ?>" style="max-height:150px; max-width: 150px;">
             <div class="card-body">
-                <h5 class="card-title text-truncate"><?= $product['product_name'] ?></h5>
-                <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
-                <p class="card-text">Origine : <?= $product['product_origin'] ?></p>
-                <p class="card-text">Prix : <?= $product['product_price'] ?> €</p>
+                <form action="" method="POST">
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $product['product_id'] ?>"/>
+                    <h5 class="card-title text-truncate"><?= $product['product_name'] ?></h5>
+                    <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
+                    <p class="card-text">Origine : <?= $product['product_origin'] ?></p>
+                    <input type="hidden" id="product_price" name="product_price" value="<?= $product['product_price'] ?>"/>
+                    <p class="card-text">Prix : <?= $product['product_price'] ?> €</p>
 
-                <?php if ($this->isAdmin) { ?>
-                    <button class="btn btn-danger">
-                        <a class="text-light" href="index.php?page=editProduct&product_id=<?= $product['product_id'] ?>">Modifier le produit</a>
-                    </button>
-                <?php }
+                    <?php if ($this->isAdmin) { ?>
+                        <a class="btn btn-danger text-light" href="index.php?page=editProduct&product_id=<?= $product['product_id'] ?>">Modifier le produit</a>
+                    <?php }
                     if ($_SESSION["user"]["role"] == "utilisateur") { ?>
-                        <form action="" method="POST">
-                            <button class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>><?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?></button>
-                            <select name="quantityOrdered" id="quantityOrdered" >
-                                <?php for ($i = 1; $i <= $product['product_quantity']; $i++) {?>
-                                    <option value="<?= $i?>"><?= $i?></option>
-                                <?php }?>
+                        <button type="submit" class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>>
+                            <?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?>
+                        </button>
+                        <?php if ($product['product_quantity'] >= 1) { ?>
+                            <select name="quantity_ordered" id="quantity_ordered">
+                                <?php for ($i = 1; $i <= $product['product_quantity']; $i++) { ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php } ?>
                             </select>
-                        </form>
-                <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+                </form>
             </div>
         </div>
     <?php } ?>

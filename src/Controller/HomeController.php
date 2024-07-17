@@ -8,7 +8,6 @@ class HomeController
     public function __construct()
     {
         $this->title = "Accueil";
-        $this->products = ["test1","test2"];
     }
 
     public function manage()
