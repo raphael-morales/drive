@@ -1,7 +1,7 @@
 <h1 style="text-align: center"><?= $this->title ?></h1>
 
 <div class="container-fluid d-flex flex-wrap justify-content-center">
-    <?php var_dump($_POST); var_dump($_SESSION["user"]["basket"]);  if (empty($this->products)) { ?>
+    <?php if (empty($this->products)) { ?>
         <p>Votre panier est vide.</p>
     <?php } else { ?>
         <?php foreach ($_SESSION['user']['basket'] as $product_ordered) {
