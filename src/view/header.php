@@ -46,7 +46,7 @@
                                 <li class="nav-item position-relative">
                                     <?php if ($_SESSION['user']['role'] === 'utilisateur') { ?>
                                         <?php if (isset($_SESSION['user']['basket'])) { ?> 
-                                            <span class="bg-danger text-light position-absolute top-0 end-0 rounded-circle px-2"><?= isset($_SESSION['user']['basket']) ?? count($_SESSION['user']['basket']) ?></span>
+                                            <span class="bg-danger text-light position-absolute top-0 end-0 rounded-circle px-2"><?php if (isset($_SESSION['user']['basket'])) echo count($_SESSION['user']['basket']) ?></span>
                                         <?php } ?>
                                         <a class="nav-link" href="index.php?page=shoppingCart"><img src="src/public/img/shoppingCart.svg" alt="panier" style="width: 48px"></a>
                                     <?php } ?>
