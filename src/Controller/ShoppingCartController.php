@@ -43,6 +43,9 @@ class ShoppingCartController
                 foreach ($_SESSION["user"]["basket"] as $key => $productsBasket) {
                     if ($productsBasket["product_id"] === $idProduct) {
                         array_splice($_SESSION["user"]["basket"], $key, 1);
+                        if (count($_SESSION["user"]["basket"]) === 0) {
+                            unset($_SESSION["user"]["basket"]);
+                        };
                     }
                 }
             }
