@@ -2,7 +2,7 @@
 
 <div class="container-fluid d-flex flex-column flex-wrap justify-content-center">
     <?php if (empty($_SESSION['user']['basket'])) { ?>
-        <p>Votre panier est vide.</p>
+        <p class="text-center">Votre panier est vide.</p>
     <?php } else { ?>
         <div class="d-flex justify-content-center">
             <?php foreach ($_SESSION['user']['basket'] as $product_ordered) {
