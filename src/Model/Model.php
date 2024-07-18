@@ -170,8 +170,11 @@ class Model
                 order_products_product_price
             ) VALUE (?,?,?,?)');
 
+            $subFromStock = $this->db->prepare('UPDATE products SET product_quantity = product_quantity - ? WHERE product_id = ?');
+
             for ($i = 0; $i < count($products); $i++) {
                 $request->execute([$order_id, $products[$i]["product_id"], $products[$i]["quantity_ordered"], $products[$i]["product_price"]]);
+                $subFromStock->execute([$products[$i]["quantity_ordered"], $products[$i]["product_id"]]);
             }
 
             $this->db->commit();

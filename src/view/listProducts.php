@@ -29,18 +29,15 @@
             <img src="<?= $product['product_picture'] ?>" class="card-img-top m-auto" alt="<?= $product['product_name'] ?>" style="max-height:150px; max-width: 150px;">
             <div class="card-body">
                 <form action="" method="POST">
-                    <input type="hidden" id="product_id" name="product_id" value="<?= $product['product_id'] ?>"/>
                     <h5 class="card-title text-truncate"><?= $product['product_name'] ?></h5>
                     <p class="card-text text-truncate"><?= $product['product_description'] ?></p>
                     <p class="card-text">Origine : <?= $product['product_origin'] ?></p>
-                    <input type="hidden" id="product_price" name="product_price" value="<?= $product['product_price'] ?>"/>
-                    <p class="card-text">Prix : <?= $product['product_price'] ?> €</p>
-
+                    <p class="card-text"><span>Prix : </span><span><input readonly class="border-0 w-25 text-center" id="product_price" name="product_price" value="<?= $product['product_price'] ?>" style="outline: none"/></span> €</p>
                     <?php if ($this->isAdmin) { ?>
                         <a class="btn btn-danger text-light" href="index.php?page=editProduct&product_id=<?= $product['product_id'] ?>">Modifier le produit</a>
                     <?php }
                     if ($_SESSION["user"]["role"] == "utilisateur") { ?>
-                        <button type="submit" class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>>
+                        <button type="submit" id="product_id" name="product_id" value="<?= $product['product_id'] ?>" class="btn btn-primary" <?= $product['product_quantity'] <= 0 ? "disabled" : "" ?>>
                             <?= $product['product_quantity'] <= 0 ? "Rupture de stock" : "Ajouter au panier" ?>
                         </button>
                         <?php if ($product['product_quantity'] >= 1) { ?>

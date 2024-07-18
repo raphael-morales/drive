@@ -25,14 +25,6 @@ class ShoppingCartController
 
     public function manage()
     {
-        if (isset($_SESSION["user"])) {
-            if (isset($_GET["valid"])) {
-                $this->model->newOrder($_SESSION["user"]["id"], $_SESSION["user"]["basket"]);
-            };
-        } else {
-            header("Location: index.php?page=signIn");
-        };
-
 
         if (!empty($_POST)){
             if (isset($_POST["idProduct"])){
