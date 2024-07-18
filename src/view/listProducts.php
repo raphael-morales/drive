@@ -8,7 +8,7 @@
     </select>
     <button type="submit" class="btn btn-light">trier par prix</button>
 </form>
-<div class="d-flex position-relative">
+<div class="d-flex position-relative p-3">
     <div class="d-flex flex-column p-3 gap-3 position-sticky btn-category" style="height: fit-content">
         <?php foreach ($this->categories as $category) {
             echo '<button type="button" class="btn btn-primary text-truncate ">

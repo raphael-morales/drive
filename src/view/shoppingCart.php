@@ -32,7 +32,7 @@
                                         <?php } ?>
                                     <?php } ?>
                                 </select>
-                                <button type="submit" class="btn btn-danger">valider</button>
+                                <button type="submit" class="btn btn-success">valider</button>
                             </form>
                             <p class="px-3">Prix total : <?= $product_ordered["quantity_ordered"] * $product_ordered["product_price"] ?> € </p>
                             <form action="" method="post" class="px-3 w-100 d-flex justify-content-center">
