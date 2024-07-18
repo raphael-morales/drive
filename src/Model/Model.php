@@ -213,7 +213,8 @@ class Model
     {
         try {
             $request = $this->db->prepare('DELETE FROM products WHERE product_id = ?');
-            return $request->execute([$productId]);
+            $request->execute([$productId]);
+            return true;
         } catch (PDOException $e) {
             error_log('Error: ' . $e->getMessage());
             return false;

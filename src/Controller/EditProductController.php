@@ -30,7 +30,7 @@ class EditProductController
         }
 
         if (isset($_GET['product_id'])) {
-            $productId = $_GET['product_id'];
+            $productId = +$_GET['product_id'];
             $this->product = $this->model->getProductById($productId);
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
