@@ -2,7 +2,10 @@
 
 class Html
 {
-    function CreateTableHtml($dataTable, $dataRoles)
+    /**
+     * @throws Exception
+     */
+    function CreateTableHtml($dataTable, $dataRoles, $bool=false)
     {
         if (!empty($dataTable)){
             $html = '<table class="table-bordered">
@@ -31,12 +34,30 @@ class Html
                                     }
                                     $html .= '</select>';
                                 }else{
-                                    $html .= '<input style="width: 100%" name="' . $key . '" value="' . $value . '">';
+                                    switch ($key){
+                                        case "Inscription":
+                                        case "Anniversaire":
+                                            $eventDate = new DateTime($value);
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $eventDate->format('d-m-Y') . '">';
+                                            break;
+                                        case "date":
+                                            $eventDate = new DateTime($value);
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $eventDate->format('d-m-Y H:i:s') . '">';
+                                            break;
+                                        default:
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $value . '">';
+                                            break;
+                                    }
+                                    $html .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
                                 }
                     $html .=   '</th>';
                 }
 
-                $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Enregistrer</button></th>';
+                if (!$bool){
+                    $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Enregistrer</button></th>';
+                }else{
+                    $html .= '<th scope="col"><button class="btn btn-primary m-1" type="submit">Traiter</button></th>';
+                }
                 $html .= '</tr></form>';
             }
             $html .= '</tbody>
