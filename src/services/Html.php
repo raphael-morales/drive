@@ -42,12 +42,13 @@ class Html
                                             break;
                                         case "date":
                                             $eventDate = new DateTime($value);
-                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="Le ' . $eventDate->format('d-m-Y à H:i:s') . '">';
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $eventDate->format('d-m-Y H:i:s') . '">';
                                             break;
                                         default:
                                             $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $value . '">';
                                             break;
                                     }
+                                    $html .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
                                 }
                     $html .=   '</th>';
                 }

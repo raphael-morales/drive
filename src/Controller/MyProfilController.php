@@ -37,6 +37,9 @@ class MyProfilController
 
     }
 
+    /**
+     * @throws Exception
+     */
     public function manage()
     {
         if (isset($_SESSION["user"]['id'])) {
