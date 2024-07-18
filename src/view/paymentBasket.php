@@ -14,7 +14,6 @@
         <input type="text" class="form-control" id="card_cvc" name="card_cvc" required>
     </div>
     <a href="index.php?page=paymentBasket&pay=true" class="btn btn-success">Payer</button>
-    <!-- <a href="index.php?page=shoppingCart&valid=true" class="btn btn-success">Payer</button> -->
 </form>
 
 
