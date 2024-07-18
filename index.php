@@ -14,9 +14,11 @@ require('src/Controller/AddProductController.php');
 require('src/Controller/MyProfilController.php');
 require('src/Controller/ListProductsController.php');
 require('src/Controller/ShoppingCartController.php');
+require('src/Controller/PaymentBasketController.php');
 require('src/Controller/EditProductController.php');
 require('src/Model/Model.php');
 require('src/Model/ModelUser.php');
+require('src/Model/ModelOrders.php');
 require('src/services/Html.php');
 require('src/services/Singleton.php');
 
@@ -30,6 +32,7 @@ $route = [
     "addProduct" => AddProductController::class,
     "listProducts" => ListProductsController::class,
     "shoppingCart" => ShoppingCartController::class,
+    "paymentBasket" => PaymentBasketController::class,
     "myProfil" => MyProfilController::class,
     "editProduct" => EditProductController::class
 ];

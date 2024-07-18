@@ -40,6 +40,17 @@ class Model
             return [];
         }
     }
+    public function clearCart($userId)
+    {
+        try {
+            $request = $this->db->prepare('DELETE FROM cart_products WHERE user_id = ?');
+            return $request->execute([$userId]);
+        } catch (PDOException $e) {
+            error_log('Error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
     public function orderProductsByAscPriceByCategory($category)
     {
         try {
