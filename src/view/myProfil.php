@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: space-around">
+<div style="display: flex; justify-content: space-around; max-height: 60%">
     <section>
         <h1 class="text-center"><?= $this->title ?></h1>
         <div class="profile-card mx-auto">
