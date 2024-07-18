@@ -27,12 +27,7 @@ class ShoppingCartController
 
     public function manage()
     {
-        if (isset($_SESSION["user"]["basket"])) {
-            foreach (($_SESSION["user"]["basket"]) as $product) {
-                $this->total2pay += floatval($product["product_price"]) * floatval($product["quantity_ordered"]);
-            }
-        }
-
+        // unset($_SESSION["user"]["basket"]);
         if (isset($_SESSION["user"])) {
             if (isset($_GET["valid"])) {
                 $this->model->newOrder($_SESSION["user"]["id"], $_SESSION["user"]["basket"]);
@@ -53,12 +48,12 @@ class ShoppingCartController
             }
         }
 
-        if (isset($_POST['product_quantity_ordered'])) {
+        if (isset($_POST['quantity_ordered'])) {
             if (isset($_SESSION['user']['basket'])) {
                 $match = false;
                 foreach ($_SESSION['user']['basket'] as $key => $p) {
                     if ($p['product_id'] == $_POST["product_id"]) {
-                        $_SESSION['user']['basket'][$key]['quantity_ordered'] = $_POST['product_quantity_ordered'];
+                        $_SESSION['user']['basket'][$key]['quantity_ordered'] = $_POST['quantity_ordered'];
                         $match = true;
                     }
                 };
@@ -79,6 +74,12 @@ class ShoppingCartController
                 ];
             };
         };
+
+        if (isset($_SESSION["user"]["basket"])) {
+            foreach (($_SESSION["user"]["basket"]) as $product) {
+                $this->total2pay += floatval($product["product_price"]) * floatval($product["quantity_ordered"]);
+            }
+        }
 
         include(__DIR__ . '/../view/header.php');
         include(__DIR__ . '/../view/shoppingCart.php');

@@ -22,7 +22,8 @@
                             </div>
                             <form action="" method="post" class="px-3">
                                 <label class="card-text">Quantité : </label>
-                                <select name="product_quantity_ordered" id="product_quantity_ordered">
+                                <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                                <select name="quantity_ordered" id="quantity_ordered">
                                     <?php for ($i = 1; $i <= $product['product_quantity']; $i++) { ?>
                                         <?php if ($i == $product_ordered["quantity_ordered"]) { ?>
                                             <option selected value="<?= $i ?>"><?= $i ?></option>
