@@ -4,7 +4,7 @@
     <?php if (empty($_SESSION['user']['basket'])) { ?>
         <p class="text-center">Votre panier est vide.</p>
     <?php } else { ?>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center flex-wrap">
             <?php foreach ($_SESSION['user']['basket'] as $product_ordered) {
             ?>
                 <?php foreach ($this->products as $product) {
