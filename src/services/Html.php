@@ -2,6 +2,9 @@
 
 class Html
 {
+    /**
+     * @throws Exception
+     */
     function CreateTableHtml($dataTable, $dataRoles, $bool=false)
     {
         if (!empty($dataTable)){
@@ -31,7 +34,20 @@ class Html
                                     }
                                     $html .= '</select>';
                                 }else{
-                                    $html .= '<input style="width: 100%" name="' . $key . '" value="' . $value . '">';
+                                    switch ($key){
+                                        case "Inscription":
+                                        case "Anniversaire":
+                                            $eventDate = new DateTime($value);
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $eventDate->format('d-m-Y') . '">';
+                                            break;
+                                        case "date":
+                                            $eventDate = new DateTime($value);
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="Le ' . $eventDate->format('d-m-Y à H:i:s') . '">';
+                                            break;
+                                        default:
+                                            $html .= '<input disabled style="width: 100%" name="' . $key . '" value="' . $value . '">';
+                                            break;
+                                    }
                                 }
                     $html .=   '</th>';
                 }
