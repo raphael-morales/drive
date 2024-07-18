@@ -52,7 +52,7 @@ class PaymentBasketController
 
         if (isset($_GET["pay"]) && $_GET["pay"] === "true") {
             $this->msg = "Le paiement a été accepté par votre banque.<br><br>Votre commande est validée.<br><br>Vous pouvez fermer cette fenêtre.";
-            $this->param = "index.php?page=home&valid=true";
+            $this->param = "index.php?page=paymentBasket&valid=true";
             $this->altParam = "Fermer";
             $this->displayValue = "Fermer";
         }
