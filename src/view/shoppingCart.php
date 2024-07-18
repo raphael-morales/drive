@@ -1,6 +1,6 @@
 <h1 style="text-align: center"><?= $this->title ?></h1>
 
-<div class="container-fluid d-flex flex-column flex-wrap justify-content-center">
+<div class="container-fluid d-flex flex-column flex-wrap justify-content-center pb-3" style="min-height: 86.5vh">
     <?php if (empty($_SESSION['user']['basket'])) { ?>
         <p class="text-center">Votre panier est vide.</p>
     <?php } else { ?>
@@ -45,11 +45,13 @@
             <?php } ?>
         </div>
     <?php } ?>
-    <div class="d-flex flex-column">
-        <p class="px-3 fs-3 fw-bold ms-auto ">Total à payer : <?= $this->total2pay ?> € </p>
-        <form method="post" action="index.php?page=paymentBasket" class="d-flex justify-content-center">
-            <input type="hidden" name="total2Pay" id="total2pay" value="<?= $this->total2pay ?>">
-            <button type="submit" class="btn btn-danger">Terminer ma commande</button>
-        </form>
-    </div>
+    <?php if (!empty($_SESSION['user']['basket'])) { ?>
+        <div class="d-flex flex-column mt-auto">
+            <p class="px-3 fs-3 fw-bold ms-auto ">Total à payer : <?= $this->total2pay ?> € </p>
+            <form method="post" action="index.php?page=paymentBasket" class="d-flex justify-content-center">
+                <input type="hidden" name="total2Pay" id="total2pay" value="<?= $this->total2pay ?>">
+                <button type="submit" class="btn btn-danger">Terminer ma commande</button>
+            </form>
+        </div>
+    <?php } ?>
 </div>

@@ -40,14 +40,17 @@ class ShoppingCartController
         if (!empty($_POST)) {
             if (isset($_POST["idProduct"])) {
                 $idProduct = intval($_POST["idProduct"]);
-                foreach ($_SESSION["user"]["basket"] as $key => $productsBasket) {
-                    if ($productsBasket["product_id"] === $idProduct) {
-                        array_splice($_SESSION["user"]["basket"], $key, 1);
-                        if (count($_SESSION["user"]["basket"]) === 0) {
-                            unset($_SESSION["user"]["basket"]);
-                        };
+                if (isset($_SESSION["user"]["basket"])) {
+                    foreach ($_SESSION["user"]["basket"] as $key => $productsBasket) {
+                        if ($productsBasket["product_id"] === $idProduct) {
+                            array_splice($_SESSION["user"]["basket"], $key, 1);
+                            if (count($_SESSION["user"]["basket"]) === 0) {
+                                unset($_SESSION["user"]["basket"]);
+                            };
+                        }
                     }
                 }
+                
             }
         }
 
