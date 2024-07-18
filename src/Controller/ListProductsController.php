@@ -55,7 +55,6 @@ class ListProductsController
                     $this->products = $this->model->getProducts();
                 }
             }
-            // unset($_SESSION["user"]["basket"]);
 
             if (isset($_POST['quantity_ordered'])) {
                 if (isset($_SESSION['user']['basket'])) {
@@ -85,7 +84,6 @@ class ListProductsController
             };
 
             if (isset($_SESSION["user"]["basket"])) {
-                var_dump($_SESSION["user"]["basket"]);
             };
         } else {
             header("Location: index.php?page=signIn");
